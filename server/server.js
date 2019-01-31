@@ -4,20 +4,25 @@ var http = require('http').Server(app); // local server
 var io = require('socket.io')(http);
 
 io.on( 'connection', (socket) => {
+
   socket.on('submit-question', (message) => {
     // guesser is sending question to server
+    console.dir(message);
     io.sockets.emit('recieve-question',message);
   });
   socket.on('receive-question', (message) => {
     // server is sending question to chooser
+    console.dir(message);
     io.sockets.emit('submit-answer',message);
   });
   socket.on('submit-answer', (message) => {
     // chooser is sending answer (Yes/No/Win) to Server
+    console.dir(message);
     io.sockets.emit('receive-answer', message);
   });
   socket.on('receive-answer', (message) => {
     // server is sending question to guesser
+    console.dir(message);
     io.sockets.emit('submit-question, message');
   });
 })

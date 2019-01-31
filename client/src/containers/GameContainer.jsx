@@ -11,6 +11,15 @@ class GameContainer extends React.Component {
     }
   }
 
+  submitForm(event) {
+    event.preventDefault();
+    const channelName = event.target.id;
+    if (this.state.msg) {
+      const newMessage = {text:this.state.msg};
+      this.socket.emit(channelName, newMessage);
+    }
+  }
+
   selectPlayerType(playerType) {
     this.setState({ playerType })
   }
