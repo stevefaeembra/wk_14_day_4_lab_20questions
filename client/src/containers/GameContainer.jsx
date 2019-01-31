@@ -61,4 +61,4 @@ class GameContainer extends React.Component {
   }
 }
 
-export default GameContainer
+export default GameContainer;

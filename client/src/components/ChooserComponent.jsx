@@ -19,4 +19,4 @@ class ChooserComponent extends Component {
 
 }
 
-export default ChooserComponent
+export default ChooserComponent;

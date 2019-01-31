@@ -1,11 +1,11 @@
-import React, {Component, Fragment} from 'react'
+import React, {Component} from 'react';
 import FormComponent from './FormComponent.jsx'
 
 class GuesserComponent extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div>
         <h1>Guesser</h1>
         <FormComponent
           onSubmit={this.props.onSubmit}
@@ -13,11 +13,9 @@ class GuesserComponent extends Component {
           msgKeyUp={this.props.msgKeyUp}
           channelName="submit-question"
         />
-      </Fragment>
+      </div>
     )
   }
-  
-
 }
 
-export default GuesserComponent
+export default GuesserComponent;
