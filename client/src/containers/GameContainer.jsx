@@ -8,11 +8,24 @@ class GameContainer extends React.Component {
     super(props)
     this.state = {
       playerType: null,
+      msg: null
     }
+    this.addMessage = this.addMessage.bind(this);
+    this.msgKeyUp = this.msgKeyUp.bind(this);
+    this.submitForm = this.submitForm.bind(this);
+  }
+
+  addMessage(message) {
+    this.setState({msg:message});
+  }
+
+  msgKeyUp(event) {
+    this.setState({msg:event.target.value})
   }
 
   submitForm(event) {
     event.preventDefault();
+    debugger;
     const channelName = event.target.id;
     if (this.state.msg) {
       const newMessage = {text:this.state.msg};
@@ -30,7 +43,7 @@ class GameContainer extends React.Component {
       case "PLAYERTYPE_GUESSER":
         return (
           <GuesserComponent
-            onSubmit={this.onSubmit}
+            onSubmit={this.submitForm}
             msg={this.state.msg}
             msgKeyUp={this.msgKeyUp}
           />
@@ -38,7 +51,7 @@ class GameContainer extends React.Component {
       case "PLAYERTYPE_CHOOSER":
         return (
           <ChooserComponent
-            onSubmit={this.onSubmit}
+            onSubmit={this.submitForm}
             msg={this.state.msg}
             msgKeyUp={this.msgKeyUp}
           />
