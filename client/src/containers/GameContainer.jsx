@@ -29,11 +29,19 @@ class GameContainer extends React.Component {
     switch(this.state.playerType) {
       case "PLAYERTYPE_GUESSER":
         return (
-          <GuesserComponent />
+          <GuesserComponent
+            onSubmit={this.onSubmit}
+            msg={this.state.msg}
+            msgKeyUp={this.msgKeyUp}
+          />
         )
       case "PLAYERTYPE_CHOOSER":
         return (
-          <ChooserComponent />
+          <ChooserComponent
+            onSubmit={this.onSubmit}
+            msg={this.state.msg}
+            msgKeyUp={this.msgKeyUp}
+          />
         )
       default:
         return (

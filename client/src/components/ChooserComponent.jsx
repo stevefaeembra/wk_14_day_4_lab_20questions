@@ -1,10 +1,19 @@
-import React from 'react'
+import React, {Component, Fragment} from 'react'
+import FormComponent from './FormComponent.jsx'
 
-class ChooserComponent extends React.Component {
+class ChooserComponent extends Component {
 
   render() {
     return (
-      <h1>Chooser</h1>
+      <Fragment>
+        <h1>Chooser</h1>
+        <FormComponent
+          onSubmit={this.props.onSubmit}
+          msg={this.props.msg}
+          msgKeyUp={this.props.msgKeyUp}
+          channelName="submit-answer"
+        />
+      </Fragment>
     )
   }
 
