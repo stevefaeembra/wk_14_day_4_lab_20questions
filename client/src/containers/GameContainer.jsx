@@ -1,6 +1,8 @@
-import React from 'react'
-import GuesserComponent from '../components/GuesserComponent'
-import ChooserComponent from '../components/ChooserComponent'
+import React from 'react';
+import io from 'socket.io-client';
+import GuesserComponent from '../components/GuesserComponent';
+import ChooserComponent from '../components/ChooserComponent';
+
 
 class GameContainer extends React.Component {
 
@@ -8,15 +10,18 @@ class GameContainer extends React.Component {
     super(props)
     this.state = {
       playerType: null,
-      msg: null
+      msg: null,
+      answer: {}
     }
-    this.addMessage = this.addMessage.bind(this);
+    this.socket = io("http://localhost:3001");
+    this.addAnswer = this.addAnswer.bind(this);
     this.msgKeyUp = this.msgKeyUp.bind(this);
     this.submitForm = this.submitForm.bind(this);
+    this.socket.on('recieve-question', this.addAnswer.bind(this));
   }
 
-  addMessage(message) {
-    this.setState({msg:message});
+  addAnswer(answer) {
+    this.setState({answer:answer});
   }
 
   msgKeyUp(event) {
@@ -25,11 +30,11 @@ class GameContainer extends React.Component {
 
   submitForm(event) {
     event.preventDefault();
-    debugger;
     const channelName = event.target.id;
     if (this.state.msg) {
       const newMessage = {text:this.state.msg};
       this.socket.emit(channelName, newMessage);
+      this.setState({msg: null})
     }
   }
 
@@ -53,6 +58,7 @@ class GameContainer extends React.Component {
           <ChooserComponent
             onSubmit={this.submitForm}
             msg={this.state.msg}
+            answer={this.state.answer}
             msgKeyUp={this.msgKeyUp}
           />
         )
